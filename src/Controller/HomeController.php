@@ -47,14 +47,14 @@ class HomeController extends AbstractController
     {
         return [
             [
-                'imageUrl' => 'https://placehold.co/800x1000?font=roboto&text=web (in progress...)',
+                'imageUrl' => 'https://placehold.co/400x200?font=roboto&text=web (in progress...)',
                 'title' => '',
                 'category' => 'Web',
                 'filter' => 'web',
                 'slug' => null,
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/phparch-1.png',
+                'imageUrl' => '/assets/img/portfolio-2/phparch-c1.png',
                 'title' => 'PHP Architect',
                 'category' => 'Publication',
                 'filter' => 'pub',
@@ -68,7 +68,7 @@ class HomeController extends AbstractController
                 'slug' => 'value-object',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/progmag-1.png',
+                'imageUrl' => '/assets/img/portfolio-2/progmag-c1.png',
                 'title' => 'Programista',
                 'category' => 'Publication',
                 'filter' => 'pub',
@@ -88,15 +88,17 @@ class HomeController extends AbstractController
     {
         return match($slug) {
             'phparch' => [
-                'PHP',
+                'Publication',
                 'https://www.phparch.com/article/value-objects/',
                 'phparch.com',
                 'PHP Architect',
-                'PHP Architect is a magazine dedicated to PHP developers. I have been a subscriber for many years and have written a few articles for them.',
+                'I was thrilled when I received a message from PHP Architect, one of the most renowned PHP magazines 
+                in the world, expressing their interest in publishing my article. The article, titled "Value Objects," 
+                has been featured in the June 2023 issue of the PHP Architect magazine, so be sure to check it out!',
                 [
-                    '/assets/img/portfolio-2/phparch-1.png',
-                    '/assets/img/portfolio-2/phparch-2.png',
-                    '/assets/img/portfolio-2/phparch-3.png',
+                    '/assets/img/portfolio-2/phparch-s1.png',
+//                    '/assets/img/portfolio-2/phparch-2.png',
+//                    '/assets/img/portfolio-2/phparch-3.png',
                 ],
             ],
             'value-object' => [
@@ -104,18 +106,21 @@ class HomeController extends AbstractController
                 'https://packagist.org/packages/lbacik/value-object',
                 'value object',
                 'Value Object',
-                'foo bar',
+                'The experiment resulted in a little library I still use today!'
+                    . ' It is available on <a href="https://packagist.org/packages/lbacik/value-object" target="_blank">Packagist</a> / <a href="https://github.com/lbacik/value-object" target="_blank">GitHub</a>'
+                    . ' and you can read more about it on <a href="https://lbacik.medium.com/value-objects-2db63b9ef5e9" target="_blank">Medium</a>.'
+                    . ' The library is also covered in the <a href="https://www.phparch.com/article/value-objects/" target="_blank">PHP Architect article</a>.',
                 [
                     '/assets/img/portfolio-2/vo-1.png',
                     '/assets/img/portfolio-2/vo-2.png',
                 ],
             ],
             'medium' => [
-                'PHP/Python/DevOps',
+                'Publication',
                 'https://lbacik.medium.com/',
                 'lbacik.medium.com',
                 'Medium',
-                'foo bar',
+                'I sometimes write on Medium about various topics. Check out my articles on Linux Namespaces, containers, PHP, and applications I have written (not only in PHP).',
                 [
                     '/assets/img/portfolio-2/medium-1.png',
                     '/assets/img/portfolio-2/medium-2.png',
@@ -127,9 +132,12 @@ class HomeController extends AbstractController
             'progmag' => [
                 'Publication',
                 'https://programistamag.pl/networking-eksperymenty-z-siecia-warstwa-druga-i-protokol-arp/',
-                'article summary',
-                'foo',
-                'bar',
+                'programistamag.pl',
+                'Programista',
+                'My article about networking and some "mysteries" in the ARP protocol, along with a small exercise on 
+                recompiling the Linux kernel to address them, was published in the July 2019 issue of Programista 
+                magazine (Polish language). The magazine is a well-known publication in Poland that covers programming 
+                and the IT industry.',
                 [
                     '/assets/img/portfolio-2/progmag-1.png',
                     '/assets/img/portfolio-2/progmag-2.png',

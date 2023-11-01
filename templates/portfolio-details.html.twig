@@ -26,7 +26,7 @@
               <h3>Information</h3>
               <ul>
                 <li><strong>Category</strong>: {{ category }}</li>
-                <li><strong>URL</strong>: <a href="{{ url }}">{{ urlLabel }}</a></li>
+                <li><strong>URL</strong>: <a href="{{ url }}" target="_blank">{{ urlLabel }}</a></li>
                 {% if language %}
                   <li><strong>Language</strong>: {{ language }}</li>
                 {% endif %}
@@ -35,7 +35,7 @@
 
             <div class="portfolio-description">
               <h2>{{ title }}</h2>
-              <p>{{ description }}</p>
+              <p>{{ description|raw }}</p>
             </div>
 
           </div>
