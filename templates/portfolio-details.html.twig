@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <main id="main">
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                {% for img in images %}
+                  <div class="swiper-slide">
+                    <img src="{{ asset(img) }}" alt="">
+                  </div>
+                {% endfor %}
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+
+            <div class="portfolio-info">
+              <h3>Information</h3>
+              <ul>
+                <li><strong>Category</strong>: {{ category }}</li>
+                <li><strong>URL</strong>: <a href="{{ url }}">{{ urlLabel }}</a></li>
+                {% if language %}
+                  <li><strong>Language</strong>: {{ language }}</li>
+                {% endif %}
+              </ul>
+            </div>
+
+            <div class="portfolio-description">
+              <h2>{{ title }}</h2>
+              <p>{{ description }}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section><!-- End Portfolio Details Section -->
+  </main><!-- End #main -->
+{% endblock %}
