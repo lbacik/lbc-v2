@@ -79,28 +79,28 @@ class HomeController extends AbstractController
                 'slug' => null,
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/phparch-c1.png',
+                'imageUrl' => '/assets/img/portfolio-2/phparch-c1.jpeg',
                 'title' => 'PHP Architect',
                 'category' => 'Publication',
                 'filter' => 'pub',
                 'slug' => 'phparch',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/vo-1.png',
+                'imageUrl' => '/assets/img/portfolio-2/vo-1.jpeg',
                 'title' => 'Value Object',
                 'category' => 'Library',
                 'filter' => 'lib',
                 'slug' => 'value-object',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/progmag-c1.png',
+                'imageUrl' => '/assets/img/portfolio-2/progmag-c1.jpeg',
                 'title' => 'Programista',
                 'category' => 'Publication',
                 'filter' => 'pub',
                 'slug' => 'progmag',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/medium-2.png',
+                'imageUrl' => '/assets/img/portfolio-2/medium-2.jpg',
                 'title' => 'Medium',
                 'category' => 'Publication',
                 'filter' => 'pub',
@@ -121,9 +121,9 @@ class HomeController extends AbstractController
                 in the world, expressing their interest in publishing my article. The article, titled "Value Objects," 
                 has been featured in the June 2023 issue of the PHP Architect magazine!',
                 [
-                    '/assets/img/portfolio-2/phparch-1.png',
-                    '/assets/img/portfolio-2/phparch-l2.png',
-                    '/assets/img/portfolio-2/phparch-l3.png',
+                    '/assets/img/portfolio-2/phparch-1.jpeg',
+                    '/assets/img/portfolio-2/phparch-l2.jpeg',
+                    '/assets/img/portfolio-2/phparch-l3.jpeg',
                 ],
             ],
             'value-object' => [
@@ -136,8 +136,8 @@ class HomeController extends AbstractController
                     . ' and you can read more about it on <a href="https://lbacik.medium.com/value-objects-2db63b9ef5e9" target="_blank">Medium</a>.'
                     . ' The library is also covered in the <a href="https://www.phparch.com/article/value-objects/" target="_blank">PHP Architect article</a>.',
                 [
-                    '/assets/img/portfolio-2/vo-1.png',
-                    '/assets/img/portfolio-2/vo-2.png',
+                    '/assets/img/portfolio-2/vo-1.jpeg',
+                    '/assets/img/portfolio-2/vo-2.jpeg',
                 ],
             ],
             'medium' => [
@@ -147,11 +147,9 @@ class HomeController extends AbstractController
                 'Medium',
                 'I sometimes write on Medium about various topics. Check out my articles on Linux Namespaces, containers, PHP, and applications I have written (not only in PHP).',
                 [
-                    '/assets/img/portfolio-2/medium-1.png',
-                    '/assets/img/portfolio-2/medium-2.png',
-                    '/assets/img/portfolio-2/medium-3.png',
-                    '/assets/img/portfolio-2/medium-4.png',
-                    '/assets/img/portfolio-2/medium-5.png',
+                    '/assets/img/portfolio-2/medium-2.jpg',
+                    '/assets/img/portfolio-2/medium-3.jpeg',
+                    '/assets/img/portfolio-2/medium-5.jpeg',
                 ],
             ],
             'progmag' => [
@@ -164,9 +162,9 @@ class HomeController extends AbstractController
                 magazine (Polish language). The magazine is a well-known publication in Poland that covers programming 
                 and the IT industry.',
                 [
-                    '/assets/img/portfolio-2/progmag-l1.png',
-                    '/assets/img/portfolio-2/progmag-l2.png',
-                    '/assets/img/portfolio-2/progmag-l3.png',
+                    '/assets/img/portfolio-2/progmag-l1.jpeg',
+                    '/assets/img/portfolio-2/progmag-l2.jpeg',
+                    '/assets/img/portfolio-2/progmag-l3.jpeg',
                 ],
             ],
             default => throw new NotFoundHttpException(),
