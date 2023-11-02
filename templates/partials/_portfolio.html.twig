@@ -1,0 +1,56 @@
+<section id="portfolio" class="portfolio section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Portfolio</h2>
+            <p>
+                My projects and publications shared on various platforms and magazines.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                <ul id="portfolio-flters">
+                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter=".filter-lib">Lib</li>
+                    <li data-filter=".filter-web">Web</li>
+                    <li data-filter=".filter-pub">Publications</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+            {% for item in portfolioItems %}
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-{{ item.filter }}">
+                    <div class="portfolio-wrap">
+                        <img src="{{ item.imageUrl }}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>{{ item.title|default('') }}</h4>
+                            <p>{{ item.category|default('') }}</p>
+                            <div class="portfolio-links">
+
+{#                                <a href="assets/img/portfolio/portfolio-1.jpg" #}
+{#                                        data-gallery="portfolioGallery" #}
+{#                                        class="portfolio-lightbox" #}
+{#                                        title="App 1"#}
+{#                                    ><i class="bx bx-plus"></i></a>#}
+
+                                {% if item.slug %}
+                                    <a href="{{ path('portfolio_details', { slug: item.slug }) }}"
+                                       class="portfolio-details-lightbox"
+                                       data-glightbox="type: external"
+                                       title="Portfolio Details"
+                                    ><i class="bx bx-link"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section><!-- End Portfolio Section -->

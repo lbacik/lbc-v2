@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+  {{ include('partials/_header.html.twig') }}
+
+  {{ include('partials/_hero.html.twig') }}
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    {{ include('partials/_about.html.twig') }}
+
+    <!-- ======= Facts Section ======= -->
+{#    {{ include('partials/_facts.html.twig') }}#}
+
+    <!-- ======= Skills Section ======= -->
+    {{ include('partials/_skills.html.twig') }}
+
+    <!-- ======= Resume Section ======= -->
+    {{ include('partials/_resume.html.twig') }}
+
+    <!-- ======= Portfolio Section ======= -->
+    {{ include('partials/_portfolio.html.twig') }}
+
+    <!-- ======= Services Section ======= -->
+{#    {{ include('partials/_services.html.twig') }}#}
+
+    <!-- ======= Testimonials Section ======= -->
+{#    {{ include('partials/_testimonials.html.twig') }}#}
+
+    <!-- ======= Contact Section ======= -->
+    {{ include('partials/_contact.html.twig') }}
+
+  </main><!-- End #main -->
+
+  {{ include('partials/_footer.html.twig') }}
+
+{% endblock %}
