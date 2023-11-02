@@ -4,23 +4,33 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\SendEmailService;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 class HomeController extends AbstractController
 {
+    public function __construct(
+        private LoggerInterface $logger,
+        private SendEmailService $sendEmailService,
+    ) {
+    }
 
-    #[Route('/')]
-    public function index(): Response
+    #[Route('/', name: 'home', methods: ['GET', 'POST'])]
+    public function index(Request $request): Response
     {
         return $this->render('index.html.twig', [
             'portfolioItems' => $this->portfolioItems(),
+            'token' => SendEmailService::TOKEN,
         ]);
     }
 
-    #[Route('/portfolio-details/{slug}', name: "portfolio_details")]
+    #[Route('/portfolio-details/{slug}', name: 'portfolio_details')]
     public function portfolioDetails(string $slug): Response
     {
         [
@@ -41,6 +51,21 @@ class HomeController extends AbstractController
             'images' => $images,
             'language' => null,
         ]);
+    }
+
+    #[Route('/contact', name: 'contact', methods: 'POST')]
+    public function contactFormData(Request $request): Response
+    {
+        try {
+            $this->sendEmailService->send($request->request->all());
+            return new Response('OK');
+        } catch (Throwable $exception) {
+            $this->logger->error($exception->getMessage(), [
+                'exception' => $exception,
+                'request' => $request->request->all(),
+            ]);
+            return new Response('Something went wrong. Please try again later.');
+        }
     }
 
     private function portfolioItems(): array
@@ -94,11 +119,11 @@ class HomeController extends AbstractController
                 'PHP Architect',
                 'I was thrilled when I received a message from PHP Architect, one of the most renowned PHP magazines 
                 in the world, expressing their interest in publishing my article. The article, titled "Value Objects," 
-                has been featured in the June 2023 issue of the PHP Architect magazine, so be sure to check it out!',
+                has been featured in the June 2023 issue of the PHP Architect magazine!',
                 [
-                    '/assets/img/portfolio-2/phparch-s1.png',
-//                    '/assets/img/portfolio-2/phparch-2.png',
-//                    '/assets/img/portfolio-2/phparch-3.png',
+                    '/assets/img/portfolio-2/phparch-1.png',
+                    '/assets/img/portfolio-2/phparch-l2.png',
+                    '/assets/img/portfolio-2/phparch-l3.png',
                 ],
             ],
             'value-object' => [
@@ -134,14 +159,14 @@ class HomeController extends AbstractController
                 'https://programistamag.pl/networking-eksperymenty-z-siecia-warstwa-druga-i-protokol-arp/',
                 'programistamag.pl',
                 'Programista',
-                'My article about networking and some "mysteries" in the ARP protocol, along with a small exercise on 
+                'Article about networking and some "mysteries" in the ARP protocol, along with a small exercise on 
                 recompiling the Linux kernel to address them, was published in the July 2019 issue of Programista 
                 magazine (Polish language). The magazine is a well-known publication in Poland that covers programming 
                 and the IT industry.',
                 [
-                    '/assets/img/portfolio-2/progmag-1.png',
-                    '/assets/img/portfolio-2/progmag-2.png',
-                    '/assets/img/portfolio-2/progmag-3.png',
+                    '/assets/img/portfolio-2/progmag-l1.png',
+                    '/assets/img/portfolio-2/progmag-l2.png',
+                    '/assets/img/portfolio-2/progmag-l3.png',
                 ],
             ],
             default => throw new NotFoundHttpException(),
