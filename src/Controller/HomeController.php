@@ -174,8 +174,8 @@ class HomeController extends AbstractController
                 'Fortune',
                 '<strong>Stack</strong>: React, Redux, Bootstrap, Python, FastAPI, ElasticSearch, Docker<br/><br/>
                 Web page that allows you to play with fortune cookies in the browser. The API is written in Python and utilises the 
-                <a href="https://pypi.org/project/lfortune/">lfortune</a> library (another one of my projects), which also has a CLI interface
-                <br/><br /> More info about the project can be found on the project\'s <a href="https://fortune.luka.sh/#about">About</a> page!
+                <a href="https://pypi.org/project/lfortune/" target="_blank">lfortune</a> library (another one of my projects), which also has a CLI interface
+                <br/><br /> More info about the project can be found on the project\'s <a href="https://fortune.luka.sh/#about" target="_blank">About</a> page!
                 ',
                 [
                     '/assets/img/portfolio-2/fortune-01.jpeg',
