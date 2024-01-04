@@ -106,6 +106,13 @@ class HomeController extends AbstractController
                 'filter' => 'pub',
                 'slug' => 'medium',
             ],
+            [
+                'imageUrl' => '/assets/img/portfolio-2/jsonhub-1.jpeg',
+                'title' => 'JsonHub',
+                'category' => 'Web',
+                'filter' => 'web',
+                'slug' => 'jsonhub',
+            ],
         ];
     }
 
@@ -181,6 +188,24 @@ class HomeController extends AbstractController
                     '/assets/img/portfolio-2/fortune-01.jpeg',
                     '/assets/img/portfolio-2/fortune-02.jpeg',
                     '/assets/img/portfolio-2/fortune-03.jpeg',
+                ],
+            ],
+            'jsonhub' => [
+                'Application',
+                'https://jsonhub.cloud',
+                'jsonhub.cloud',
+                'JsonHub',
+                '<strong>Stack</strong>: PHP (Symfony), Stimulus/Turbo, Api Platform (REST API), Bootstrap, MySQL, Redis, Docker<br/><br/>
+                Generally, JsonHub is a web application that allows you to store and share JSON and 
+                <a href="https://json-schema.org" target="_blank">JSON Schema</a> documents. But - it is only the tip of the 
+                iceberg - it is full of potential! Currently (01.2024), the project is in its early development phase. 
+                Although the design needs improvement, it is already functional. 
+                ',
+                [
+                    '/assets/img/portfolio-2/jsonhub-1.jpeg',
+                    '/assets/img/portfolio-2/jsonhub-2.jpeg',
+                    '/assets/img/portfolio-2/jsonhub-3.jpeg',
+                    '/assets/img/portfolio-2/jsonhub-4.jpeg',
                 ],
             ],
             default => throw new NotFoundHttpException(),
