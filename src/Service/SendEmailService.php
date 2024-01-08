@@ -31,7 +31,7 @@ class SendEmailService
 
         $this->mailer->send(
             (new Email())
-                ->from('contact-lbc@gprodb.com')
+                ->from('no-reply@lukaszbacik.com')
                 ->to($to)
                 ->subject($subject)
                 ->text("name: {$name}\nemail: {$email}\n\n{$message}")
