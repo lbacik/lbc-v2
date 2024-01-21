@@ -113,6 +113,13 @@ class HomeController extends AbstractController
                 'filter' => 'web',
                 'slug' => 'jsonhub',
             ],
+            [
+                'imageUrl' => '/assets/img/portfolio-2/gprodb-01.jpeg',
+                'title' => 'GProDB',
+                'category' => 'Web',
+                'filter' => 'web',
+                'slug' => 'gprodb',
+            ],
         ];
     }
 
@@ -206,6 +213,24 @@ class HomeController extends AbstractController
                     '/assets/img/portfolio-2/jsonhub-2.jpeg',
                     '/assets/img/portfolio-2/jsonhub-3.jpeg',
                     '/assets/img/portfolio-2/jsonhub-4.jpeg',
+                ],
+            ],
+            'gprodb' => [
+                'Application',
+                'https://pages.gprodb.com/018c0c05-be94-7b11-aaa5-9d59c24cbbda',
+                'pages.gprodb.com',
+                'GProDB',
+                '<strong>Stack</strong>: PHP (Symfony), Bootstrap, Docker<br/><br/>
+                 This straightforward web application allows you to quickly create your business\'s web page 
+                 (so-called landing page). It utilised the <a href="/portfolio-details/jsonhub">JsonHub project</a> 
+                 to store the data. More friendly UI (than the native JsonHub one) and a dedicated searching mechanism 
+                 are the main future plans!  
+                ',
+                [
+                    '/assets/img/portfolio-2/gprodb-01.jpeg',
+                    '/assets/img/portfolio-2/gprodb-02.jpeg',
+                    '/assets/img/portfolio-2/gprodb-03.jpeg',
+                    '/assets/img/portfolio-2/gprodb-04.jpeg',
                 ],
             ],
             default => throw new NotFoundHttpException(),
