@@ -120,6 +120,13 @@ class HomeController extends AbstractController
                 'filter' => 'web',
                 'slug' => 'gprodb',
             ],
+            [
+                'imageUrl' => '/assets/img/portfolio-2/glife-01.jpeg',
+                'title' => 'GLife',
+                'category' => 'Web',
+                'filter' => 'web',
+                'slug' => 'glife',
+            ],
         ];
     }
 
@@ -231,6 +238,22 @@ class HomeController extends AbstractController
                     '/assets/img/portfolio-2/gprodb-02.jpeg',
                     '/assets/img/portfolio-2/gprodb-03.jpeg',
                     '/assets/img/portfolio-2/gprodb-04.jpeg',
+                ],
+            ],
+            'glife' => [
+                'Application',
+                'https://glife.luka.sh',
+                'glife.luka.sh',
+                'GLife',
+                '<strong>Stack</strong>: PHP (Symfony), AssetMapper, Stimulus, Turbo, Tailwindcss, JSON Schema, Python, RabbitMQ, Docker<br/><br/>
+                GLife is a web application that allows you to play Conway\'s Game of Life. It utilises the Genetic 
+                Algorithm to determine the best starting state for the game based on the Fitness Function configuration. 
+                This portion of the project was coded in Python, with RabbitMQ used for communication.
+                ',
+                [
+                    '/assets/img/portfolio-2/glife-01.jpeg',
+                    '/assets/img/portfolio-2/glife-02.jpeg',
+                    '/assets/img/portfolio-2/glife-03.jpeg',
                 ],
             ],
             default => throw new NotFoundHttpException(),
