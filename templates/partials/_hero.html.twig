@@ -20,18 +20,11 @@
     </div>
 
      <div id="gls"
-          class="d-flex col-12 col-md-6 order-first order-md-last align-content-center align-items-center"
+          class="d-flex col-12 col-md-6 order-first order-md-last align-content-center align-items-center d-none"
           data-gls-data={{ asset('resources/gls-data.json') }}
           data-controller="gls"
      >
-        <canvas
-                id="canvas"
-{#                width="300"#}
-{#                height="300"#}
-{#                style="background-color: gray"#}
-{#                class="border border-1"#}
-                data-gls-target="canvas"
-        ></canvas>
+        <canvas id="canvas" data-gls-target="canvas"></canvas>
     </div>
 
 </section><!-- End Hero -->
