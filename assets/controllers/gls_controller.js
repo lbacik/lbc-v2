@@ -16,9 +16,14 @@ export default class extends Controller {
         this.canvasTarget.getContext('2d').scale(4,2)
         this.canvasTarget.getContext('2d').translate(-110, -40)
 
+        this.calculateCanvasScale()
+
         fetch(this.element.dataset.glsData)
             .then(response => response.json())
             .then(data => this.render(data))
+
+        let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        console.log('viewport height: ', vh)
     }
 
     render(glsData) {
@@ -28,11 +33,23 @@ export default class extends Controller {
     }
 
     animate() {
+        this.calculateCanvasScale()
         this.gls.step()
 
         setTimeout(
             () => window.requestAnimationFrame(() => this.animate()),
             25
         )
+    }
+
+    calculateCanvasScale() {
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+
+        if (vh < 500 && vw < 800) {
+            this.element.classList.add('d-none')
+        } else {
+            this.element.classList.remove('d-none')
+        }
     }
 }
