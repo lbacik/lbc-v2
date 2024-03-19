@@ -1,18 +1,37 @@
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="container" data-aos="zoom-in" data-aos-delay="100">
-        <h1>Łukasz Bacik</h1>
-        <p>I'm <span class="typed" data-typed-items="Developer, DevOps, Agile enthusiast"></span></p>
-        <div class="social-links">
+<section id="hero" class="row">
 
-            {#        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>#}
-            {#        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>#}
-            {#        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>#}
-            {#        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>#}
+    <div class="d-flex flex-column justify-content-center col-12 col-md-6 order-last order-md-first">
+        <div class="container" data-aos="zoom-in" data-aos-delay="100">
+            <h1>Łukasz Bacik</h1>
+            <p>I'm <span class="typed" data-typed-items="Developer, DevOps, Agile enthusiast"></span></p>
+            <div class="social-links">
 
-            <a href="https://github.com/lbacik" class="linkedin"><i class="bx bxl-github"></i></a>
-            <a href="https://lbacik.medium.com" class="linkedin"><i class="fa-brands fa-medium"></i></a>
-            <a href="https://www.linkedin.com/in/łukasz-bacik-8021a57b/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                {#        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>#}
+                {#        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>#}
+                {#        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>#}
+                {#        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>#}
+
+                <a href="https://github.com/lbacik" class="linkedin"><i class="bx bxl-github"></i></a>
+                <a href="https://lbacik.medium.com" class="linkedin"><i class="fa-brands fa-medium"></i></a>
+                <a href="https://www.linkedin.com/in/łukasz-bacik-8021a57b/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
         </div>
     </div>
+
+     <div id="gls"
+          class="d-flex col-12 col-md-6 order-first order-md-last align-content-center align-items-center"
+          data-gls-data={{ asset('resources/gls-data.json') }}
+          data-controller="gls"
+     >
+        <canvas
+                id="canvas"
+{#                width="300"#}
+{#                height="300"#}
+{#                style="background-color: gray"#}
+{#                class="border border-1"#}
+                data-gls-target="canvas"
+        ></canvas>
+    </div>
+
 </section><!-- End Hero -->
