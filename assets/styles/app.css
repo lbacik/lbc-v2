@@ -1,3 +1,12 @@
 /*body {*/
 /*    background-color: skyblue;*/
 /*}*/
+
+
+#canvas {
+    /*border: 1px solid black;*/
+    margin: 0 auto;
+    display: block;
+    width: 300px;
+    height: 300px;
+}
