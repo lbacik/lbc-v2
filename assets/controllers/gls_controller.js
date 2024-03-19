@@ -29,6 +29,10 @@ export default class extends Controller {
 
     animate() {
         this.gls.step()
-        window.requestAnimationFrame(() => this.animate())
+
+        setTimeout(
+            () => window.requestAnimationFrame(() => this.animate()),
+            25
+        )
     }
 }
