@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Service\SendEmailService;
 use Psr\Log\LoggerInterface;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ class HomeController extends AbstractController
     public function __construct(
         private LoggerInterface $logger,
         private SendEmailService $sendEmailService,
+        private readonly ReCaptcha $reCaptcha,
     ) {
     }
 
@@ -56,14 +58,21 @@ class HomeController extends AbstractController
     #[Route('/contact', name: 'contact', methods: 'POST')]
     public function contactFormData(Request $request): Response
     {
+        if (!$this->reCaptchaSuccess($request)) {
+            return new Response('Invalid reCAPTCHA response.');
+        }
+
         try {
             $this->sendEmailService->send($request->request->all());
+
             return new Response('OK');
+
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), [
                 'exception' => $exception,
                 'request' => $request->request->all(),
             ]);
+
             return new Response('Something went wrong. Please try again later.');
         }
     }
@@ -258,5 +267,13 @@ class HomeController extends AbstractController
             ],
             default => throw new NotFoundHttpException(),
         };
+    }
+
+    private function reCaptchaSuccess(Request $request): bool
+    {
+        $recaptchaResponse = $request->request->get('recaptcha-response');
+        $recaptcha = $this->reCaptcha->verify($recaptchaResponse, $request->getClientIp());
+
+        return $recaptcha->isSuccess();
     }
 }
