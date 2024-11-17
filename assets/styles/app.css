@@ -10,3 +10,8 @@
     bottom: 100px !important;
     z-index: 100;
 }
+
+.portfolio-description a {
+    font-weight: bold;
+    color: #0d6efd;
+}
