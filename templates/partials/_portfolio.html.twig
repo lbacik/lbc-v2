@@ -25,7 +25,7 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-{{ item.filter }}">
                     <div class="portfolio-wrap">
-                        <img src="{{ item.imageUrl }}" class="img-fluid" alt="">
+                        <img src="{{ asset(item.imageUrl) }}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>{{ item.title|default('') }}</h4>
                             <p>{{ item.category|default('') }}</p>

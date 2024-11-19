@@ -6,11 +6,12 @@ namespace App\Controller;
 
 use App\Service\SendEmailService;
 use Psr\Log\LoggerInterface;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Throwable;
 
 class HomeController extends AbstractController
@@ -18,6 +19,7 @@ class HomeController extends AbstractController
     public function __construct(
         private LoggerInterface $logger,
         private SendEmailService $sendEmailService,
+        private readonly ReCaptcha $reCaptcha,
     ) {
     }
 
@@ -56,14 +58,21 @@ class HomeController extends AbstractController
     #[Route('/contact', name: 'contact', methods: 'POST')]
     public function contactFormData(Request $request): Response
     {
+        if (!$this->reCaptchaSuccess($request)) {
+            return new Response('Invalid reCAPTCHA response.');
+        }
+
         try {
             $this->sendEmailService->send($request->request->all());
+
             return new Response('OK');
+
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage(), [
                 'exception' => $exception,
                 'request' => $request->request->all(),
             ]);
+
             return new Response('Something went wrong. Please try again later.');
         }
     }
@@ -72,56 +81,56 @@ class HomeController extends AbstractController
     {
         return [
             [
-                'imageUrl' => '/assets/img/portfolio-2/fortune-01.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/fortune-01.jpeg',
                 'title' => 'Fortune',
                 'category' => 'Web',
                 'filter' => 'web',
                 'slug' => 'fortune',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/phparch-c1.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/phparch-c1.jpeg',
                 'title' => 'PHP Architect',
                 'category' => 'Publication',
                 'filter' => 'pub',
                 'slug' => 'phparch',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/vo-1.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/vo-1.jpeg',
                 'title' => 'Value Object',
                 'category' => 'Library',
                 'filter' => 'lib',
                 'slug' => 'value-object',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/progmag-c1.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/progmag-c1.jpeg',
                 'title' => 'Programista',
                 'category' => 'Publication',
                 'filter' => 'pub',
                 'slug' => 'progmag',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/medium-2.jpg',
+                'imageUrl' => '/template/img/portfolio-2/medium-2.jpg',
                 'title' => 'Medium',
                 'category' => 'Publication',
                 'filter' => 'pub',
                 'slug' => 'medium',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/jsonhub-1.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/jsonhub-1.jpeg',
                 'title' => 'JsonHub',
                 'category' => 'Web',
                 'filter' => 'web',
                 'slug' => 'jsonhub',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/gprodb-01.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/gprodb-01.jpeg',
                 'title' => 'GProDB',
                 'category' => 'Web',
                 'filter' => 'web',
                 'slug' => 'gprodb',
             ],
             [
-                'imageUrl' => '/assets/img/portfolio-2/glife-01.jpeg',
+                'imageUrl' => '/template/img/portfolio-2/glife-01.jpeg',
                 'title' => 'GLife',
                 'category' => 'Web',
                 'filter' => 'web',
@@ -258,5 +267,13 @@ class HomeController extends AbstractController
             ],
             default => throw new NotFoundHttpException(),
         };
+    }
+
+    private function reCaptchaSuccess(Request $request): bool
+    {
+        $recaptchaResponse = $request->request->get('recaptcha-response');
+        $recaptcha = $this->reCaptcha->verify($recaptchaResponse, $request->getClientIp());
+
+        return $recaptcha->isSuccess();
     }
 }
