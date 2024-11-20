@@ -25,27 +25,24 @@
 
                 <div class="col-lg-4 col-md-6 portfolio-item filter-{{ item.filter }}">
                     <div class="portfolio-wrap">
-                        <img src="{{ asset(item.imageUrl) }}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>{{ item.title|default('') }}</h4>
-                            <p>{{ item.category|default('') }}</p>
-                            <div class="portfolio-links">
-
-{#                                <a href="assets/img/portfolio/portfolio-1.jpg" #}
-{#                                        data-gallery="portfolioGallery" #}
-{#                                        class="portfolio-lightbox" #}
-{#                                        title="App 1"#}
-{#                                    ><i class="bx bx-plus"></i></a>#}
-
-                                {% if item.slug %}
-                                    <a href="{{ path('portfolio_details', { slug: item.slug }) }}"
-                                       class="portfolio-details-lightbox"
-                                       data-glightbox="type: external"
-                                       title="Portfolio Details"
-                                    ><i class="bx bx-link"></i></a>
-                                {% endif %}
+                        {% if item.slug %}
+                            <a href="{{ path('portfolio_details', { slug: item.slug }) }}"
+                               class="portfolio-details-lightbox"
+                               data-glightbox="type: external"
+                               title="Portfolio Details"
+                            >
+                        {% endif %}
+                            <img src="{{ asset(item.imageUrl) }}" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>{{ item.title|default('') }}</h4>
+                                <p>{{ item.category|default('') }}</p>
+                                <div class="portfolio-links">
+                                        <i class="bx bx-link" style="font-size: 28px"></i>
+                                </div>
                             </div>
-                        </div>
+                        {% if item.slug %}
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
 

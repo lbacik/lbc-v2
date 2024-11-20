@@ -1,0 +1,204 @@
+Fortune:
+  image: fortune-01.jpeg
+  category: Web
+  filter: web
+  slug: fortune
+  type: Application
+  url:
+    name: fortune.luka.sh
+    href: https://fortune.luka.sh
+  carousel:
+    - fortune-01.jpeg
+    - fortune-02.jpeg
+    - fortune-03.jpeg
+  description: >
+    <strong>Stack</strong>: React, Redux, Bootstrap, Python, FastAPI, ElasticSearch, Docker
+    
+    
+    A web page that allows users to play with fortune cookies in the browser. The API is written in Python and 
+    utilizes the <a href="https://pypi.org/project/lfortune/" target="_blank">lfortune</a> library 
+    (another one of my projects), which also includes a CLI interface.
+    
+    
+    For more information about the project, please visit the project's 
+    <a href="https://fortune.luka.sh/#about" target="_blank">About</a> page!
+
+PHP Architect:
+  image: phparch-c1.jpeg
+  category: Publication
+  filter: pub
+  slug: phparch
+  type: Publication
+  url:
+    name: phparch.com
+    href: https://www.phparch.com/article/value-objects/
+  carousel:
+    - phparch-1.jpeg
+    - phparch-l2.jpeg
+    - phparch-l3.jpeg
+  description: >
+    I was excited to receive a message from PHP Architect, one of the most respected PHP magazines in the world, 
+    expressing interest in publishing my article. The article, titled "Value Objects," was featured in the June 2023 
+    issue of PHP Architect magazine!
+
+Value Object:
+  image: vo-1.jpeg
+  category: Library
+  filter: lib
+  slug: value-object
+  type: Library
+  url:
+    name: value object
+    href: https://packagist.org/packages/lbacik/value-object
+  carousel:
+    - vo-1.jpeg
+    - vo-2.jpeg
+  description: >
+    The experiment I began a few years ago resulted in a modest library that I continue to utilize to this day.
+    
+    
+    It is available on <a href="https://packagist.org/packages/lbacik/value-object" target="_blank">Packagist</a> / <a href="https://github.com/lbacik/value-object" target="_blank">GitHub</a>
+    and you can read more about it on <a href="https://lbacik.medium.com/value-objects-2db63b9ef5e9" target="_blank">Medium</a>.
+    
+    
+    The library is also a key focus of an article at <a href="https://www.phparch.com/article/value-objects/" target="_blank">PHP Architect</a>, 
+    which I had the pleasure of publishing.
+    
+    
+    The library contains the unit tests written using the PHPUnit framework, but there have also been phpspec tests 
+    created (BDD), which can be found in the 
+    <a href="https://github.com/lbacik/value-object-spec" target="_blank">value-object-spec</a> repository.
+
+Programista:
+  image: progmag-c1.jpeg
+  category: Publication
+  filter: pub
+  slug: progmag
+  type: Publication
+  url:
+    name: programistamag.pl
+    href: https://programistamag.pl/networking-eksperymenty-z-siecia-warstwa-druga-i-protokol-arp/
+  carousel:
+    - progmag-l1.jpeg
+    - progmag-l2.jpeg
+    - progmag-l3.jpeg
+  description: >
+    My article discusses networking and some aspects of the ARP protocol, along with a brief exercise on recompiling 
+    the Linux kernel to address these topics. It was published in the July 2019 issue of Programista magazine (in Polish).
+
+Medium:
+  image: medium-2.jpg
+  category: Publication
+  filter: pub
+  slug: medium
+  type: Publication
+  url:
+    name: lbacik.medium.com
+    href: https://lbacik.medium.com/
+  carousel:
+    - medium-2.jpg
+    - medium-3.jpeg
+    - medium-5.jpeg
+  description: >
+    I occasionally write on Medium about a variety of topics. You can check out my articles on Linux Namespaces, 
+    containers, PHP, and other applications I have written, not limited to PHP.
+
+JsonHub:
+  image: jsonhub-1.jpeg
+  category: Web
+  filter: web
+  slug: jsonhub
+  type: Application
+  url:
+    name: jsonhub.cloud
+    href: https://jsonhub.cloud/
+  carousel:
+    - jsonhub-1.jpeg
+    - jsonhub-2.jpeg
+    - jsonhub-3.jpeg
+    - jsonhub-4.jpeg
+  description: >
+    <strong>Stack</strong>: PHP (Symfony), Stimulus/Turbo, Api Platform (REST API), Bootstrap, MySQL, Redis, Docker
+    
+    
+    JsonHub is a web application for storing and sharing JSON and JSON Schema documents. It is currently in the 
+    early development phase but is already functional.
+
+GProDB:
+  image: gprodb-01.jpeg
+  category: Web
+  filter: web
+  slug: gprodb
+  type: Application
+  url:
+    name: pages.gprodb.com
+    href: https://pages.gprodb.com/018c0c05-be94-7b11-aaa5-9d59c24cbbda
+  carousel:
+    - gprodb-01.jpeg
+    - gprodb-02.jpeg
+    - gprodb-03.jpeg
+    - gprodb-04.jpeg
+  description: >
+    <strong>Stack</strong>: PHP (Symfony), Bootstrap, Docker
+
+
+    GProDB is a web application that enables quick creation of business landing pages, featuring JsonHub integration 
+    for data storage. Future plans include a more user-friendly interface and enhanced search capabilities.
+
+GLife:
+  image: glife-01.jpeg
+  category: Web
+  filter: web
+  slug: glife
+  type: Application
+  url:
+    name: glife.luka.sh
+    href: https://glife.luka.sh/
+  carousel:
+    - glife-01.jpeg
+    - glife-02.jpeg
+    - glife-03.jpeg
+  description: >
+    <strong>Stack</strong>: PHP (Symfony), AssetMapper, Stimulus, Turbo, Tailwindcss, JSON Schema, Python, RabbitMQ, Docker
+  
+  
+    GLife is a web application for playing Conway's Game of Life using Genetic Algorithms to determine the optimal 
+    starting state based on the configuration of the Fitness Function.
+
+
+PaySubscriptions:
+  image: paysub-01c.png
+  category: Web
+  filter: web
+  slug: paysub
+  type: Application
+  url:
+    name: paysubscriptions.com
+    href: https://paysubscriptions.com
+  carousel:
+    - paysub-01c.png
+    - paysub-02b.png
+    - paysub-03b.png
+    - paysub-04b.png
+  description: >
+    <strong>Stack</strong>: PHP (Symfony), Stimulus/Turbo, Tailwindcss, MySql, Docker
+    
+    
+    PaySubscriptions is a web application that allows users to manage their subscriptions. 
+
+lfortune:
+  image: lfortune-03.png
+  category: Library
+  filter: lib
+  slug: lfortune
+  type: Application/Library
+  url:
+    name: lfortune
+    href: https://pypi.org/project/lfortune/
+  carousel:
+    - lfortune-03.png
+    - lfortune-02.png
+  description: >
+    A Python application that generates fortune cookies. The application is also used (as a module) in the 
+    <a href="https://fortune.luka.sh" type="_blank">Fortune</a> project, which is a web app that allows 
+    users to play with fortune cookies in the browser.
