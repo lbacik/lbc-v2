@@ -1,0 +1,104 @@
+name: Deploy
+
+# Reusable: called by release.yml right after a tag is built, and callable by
+# hand to redeploy or roll back to any tag that already has an image in GHCR.
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag to deploy (e.g. v1.10)'
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-rum
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://lukaszbacik.com
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      # Take compose.prod.yaml from the tag being deployed, not from HEAD.
+      - name: Checkout ${{ inputs.tag }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+
+      # Mirrors the local `rum` docker context, so DOCKER_HOST=ssh://rum
+      # resolves the same way here as it does on a workstation.
+      - name: Configure SSH access to rum
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_SSH_KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/gha-deploy
+          chmod 600 ~/.ssh/gha-deploy
+          printf '%s\n' "$DEPLOY_SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          cat >> ~/.ssh/config <<'EOF'
+          Host rum
+            HostName rum.host.luka.sh
+            Port 2211
+            User debian
+            IdentityFile ~/.ssh/gha-deploy
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+          EOF
+
+      # Logging in here is enough: the CLI forwards the auth with the pull, so
+      # the private image reaches rum's daemon without credentials landing on
+      # the host.
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        env:
+          DOCKER_HOST: ssh://rum
+          APP_IMAGE: ghcr.io/${{ github.repository }}:${{ inputs.tag }}
+          NETWORK: main
+          VIRTUAL_HOST: lukaszbacik.com,www.lukaszbacik.com
+          LETSENCRYPT_HOST: lukaszbacik.com,www.lukaszbacik.com
+          LETSENCRYPT_EMAIL: ${{ vars.LETSENCRYPT_EMAIL }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          MAILER_DSN: ${{ secrets.MAILER_DSN }}
+          GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
+          GOOGLE_RECAPTCHA_SECRET: ${{ secrets.GOOGLE_RECAPTCHA_SECRET }}
+        run: |
+          # --env-file /dev/null is load-bearing: without it compose reads the
+          # repo's committed .env, and a missing secret here would silently
+          # fall back to the dev APP_SECRET instead of failing the deploy.
+          docker compose --env-file /dev/null -f compose.prod.yaml -p lbc-v2 \
+            up -d --pull always --wait
+
+      - name: Smoke test
+        env:
+          DOCKER_HOST: ssh://rum
+        run: |
+          # The first ever deploy also waits here for Let's Encrypt issuance.
+          for _ in $(seq 1 20); do
+            code=$(curl -fsS -o /dev/null -w '%{http_code}' https://lukaszbacik.com/ || true)
+            if [ "$code" = "200" ]; then
+              echo "site is up"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::site did not become healthy" >&2
+          docker compose -p lbc-v2 logs --tail 100 || true
+          exit 1
