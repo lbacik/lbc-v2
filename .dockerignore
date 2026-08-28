@@ -1,3 +1,9 @@
+.git/
+.idea/
+.DS_Store
+tags
 vendor/
 var/
+public/assets/
+public/bundles/
 .env.local

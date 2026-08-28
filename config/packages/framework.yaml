@@ -5,6 +5,13 @@ framework:
     http_method_override: false
     handle_all_throwables: true
 
+    # In production the app runs behind nginx-proxy, which terminates TLS.
+    # Without this Symfony sees every request as plain HTTP: cookie_secure
+    # "auto" never applies, and generated absolute URLs come out as http://.
+    # TRUSTED_PROXIES is unset in dev, where "default::" makes this a no-op.
+    trusted_proxies: '%env(default::TRUSTED_PROXIES)%'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-forwarded-port']
+
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
