@@ -1,4 +1,4 @@
-FROM php:8.2 as base
+FROM php:8.4 as base
 
 RUN apt -y update \
     && apt -y install git unzip \
@@ -6,7 +6,7 @@ RUN apt -y update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm -rf /var/cache/apk/*
 
-COPY --from=composer:2.1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . /opt/app
 WORKDIR /opt/app
@@ -14,7 +14,7 @@ WORKDIR /opt/app
 RUN composer install
     # --no-devgc --no-interaction --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
 
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 COPY --from=base /opt/app /opt/app/
 WORKDIR /opt/app
