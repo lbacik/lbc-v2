@@ -22,3 +22,41 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Deployment-owned SES v2 client for the dedicated contact-form tenant.
+    # Credentials are dedicated IAM keys injected through the environment.
+    AsyncAws\Ses\SesClient:
+        arguments:
+            $configuration:
+                region: '%env(SES_REGION)%'
+                accessKeyId: '%env(SES_ACCESS_KEY_ID)%'
+                accessKeySecret: '%env(SES_SECRET_ACCESS_KEY)%'
+
+    # Immutable SES tenant boundary. Resolved from deployment configuration
+    # only; request input can never override these values.
+    App\Mail\MailBoundary:
+        arguments:
+            $tenantName: '%env(SES_TENANT_NAME)%'
+            $configurationSetName: '%env(SES_CONFIGURATION_SET)%'
+            $region: '%env(SES_REGION)%'
+            $fromAddress: '%env(MAIL_FROM_ADDRESS)%'
+            $operatorRecipient: '%env(MAIL_OPERATOR_RECIPIENT)%'
+
+    # Deployment-owned mail mode: disabled (default) | validation | enabled.
+    App\Mail\MailModeGate:
+        arguments:
+            $mode: '%env(MAIL_MODE)%'
+            $validationUntil: '%env(MAIL_VALIDATION_UNTIL)%'
+            $validationToken: '%env(MAIL_VALIDATION_TOKEN)%'
+
+    App\Mail\ContactRateLimiter:
+        arguments:
+            $pool: '@cache.app'
+            $limit: '%env(int:CONTACT_RATE_LIMIT)%'
+            $windowSeconds: '%env(int:CONTACT_RATE_WINDOW_SECONDS)%'
+
+    App\Mail\RecaptchaVerifier:
+        arguments:
+            $expectedAction: 'php_email_form_submit'
+            $expectedHostname: '%env(RECAPTCHA_EXPECTED_HOSTNAME)%'
+            $scoreThreshold: '%env(float:RECAPTCHA_SCORE_THRESHOLD)%'

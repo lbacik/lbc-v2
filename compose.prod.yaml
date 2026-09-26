@@ -26,7 +26,24 @@ services:
       APP_ENV: prod
       APP_DEBUG: "0"
       APP_SECRET: "${APP_SECRET:?APP_SECRET is required}"
-      MAILER_DSN: "${MAILER_DSN:?MAILER_DSN is required}"
+      # Deployment-owned SES v2 tenant boundary for the contact form.
+      # Non-secret boundary values are plain inputs; the dedicated IAM key
+      # travels through the same required-env secret mechanism as APP_SECRET.
+      # See docs/ses-tenant-mail.md (incl. two-key rotation).
+      SES_TENANT_NAME: "${SES_TENANT_NAME:?SES_TENANT_NAME is required}"
+      SES_CONFIGURATION_SET: "${SES_CONFIGURATION_SET:-lbc-first-contact-events}"
+      SES_REGION: "${SES_REGION:-eu-central-1}"
+      MAIL_FROM_ADDRESS: "${MAIL_FROM_ADDRESS:-no-reply@lukaszbacik.com}"
+      MAIL_OPERATOR_RECIPIENT: "${MAIL_OPERATOR_RECIPIENT:?MAIL_OPERATOR_RECIPIENT is required}"
+      SES_ACCESS_KEY_ID: "${SES_ACCESS_KEY_ID:?SES_ACCESS_KEY_ID is required}"
+      SES_SECRET_ACCESS_KEY: "${SES_SECRET_ACCESS_KEY:?SES_SECRET_ACCESS_KEY is required}"
+      MAIL_MODE: "${MAIL_MODE:-disabled}"
+      MAIL_VALIDATION_UNTIL: "${MAIL_VALIDATION_UNTIL:-}"
+      MAIL_VALIDATION_TOKEN: "${MAIL_VALIDATION_TOKEN:-}"
+      CONTACT_RATE_LIMIT: "${CONTACT_RATE_LIMIT:-5}"
+      CONTACT_RATE_WINDOW_SECONDS: "${CONTACT_RATE_WINDOW_SECONDS:-3600}"
+      RECAPTCHA_EXPECTED_HOSTNAME: "${RECAPTCHA_EXPECTED_HOSTNAME:-}"
+      RECAPTCHA_SCORE_THRESHOLD: "${RECAPTCHA_SCORE_THRESHOLD:-0.5}"
       GOOGLE_RECAPTCHA_SITE_KEY: "${GOOGLE_RECAPTCHA_SITE_KEY}"
       GOOGLE_RECAPTCHA_SECRET: "${GOOGLE_RECAPTCHA_SECRET}"
       # nginx-proxy terminates TLS; trust only the directly connected proxy
