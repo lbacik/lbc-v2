@@ -57,7 +57,7 @@
                     <div class="text-center">
                         <button type="submit">Send Message</button>
                     </div>
-                    <input type="hidden" name="token" value="{{ token }}"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('contact') }}"/>
                 </form>
             </div>
         </div>
