@@ -76,10 +76,23 @@ jobs:
           LETSENCRYPT_HOST: lukaszbacik.com,www.lukaszbacik.com
           LETSENCRYPT_EMAIL: ${{ vars.LETSENCRYPT_EMAIL }}
           APP_SECRET: ${{ secrets.APP_SECRET }}
-          MAILER_DSN: ${{ secrets.MAILER_DSN }}
           GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
           GOOGLE_RECAPTCHA_SECRET: ${{ secrets.GOOGLE_RECAPTCHA_SECRET }}
+          SES_TENANT_NAME: ${{ vars.SES_TENANT_NAME }}
+          SES_CONFIGURATION_SET: ${{ vars.SES_CONFIGURATION_SET }}
+          SES_REGION: ${{ vars.SES_REGION }}
+          MAIL_OPERATOR_RECIPIENT: ${{ vars.MAIL_OPERATOR_RECIPIENT }}
+          SES_ACCESS_KEY_ID: ${{ secrets.SES_ACCESS_KEY_ID }}
+          SES_SECRET_ACCESS_KEY: ${{ secrets.SES_SECRET_ACCESS_KEY }}
+          MAIL_MODE: ${{ vars.MAIL_MODE }}
         run: |
+          # The SES key may be absent only while mail is disabled. The app
+          # refuses other modes without it, but only on the first /contact
+          # request, so fail here before rollout instead.
+          if [ "${MAIL_MODE:-disabled}" != "disabled" ] && { [ -z "$SES_ACCESS_KEY_ID" ] || [ -z "$SES_SECRET_ACCESS_KEY" ]; }; then
+            echo "::error::MAIL_MODE=$MAIL_MODE requires SES_ACCESS_KEY_ID and SES_SECRET_ACCESS_KEY" >&2
+            exit 1
+          fi
           # --env-file /dev/null is load-bearing: without it compose reads the
           # repo's committed .env, and a missing secret here would silently
           # fall back to the dev APP_SECRET instead of failing the deploy.
