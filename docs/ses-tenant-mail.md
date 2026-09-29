@@ -33,6 +33,11 @@ The visitor's address is validated and used only as Reply-To.
   addresses, tokens, credentials, or raw AWS exceptions).
 - `enabled` — normal operation.
 
+In the `production` environment, `MAIL_MODE` and `MAIL_VALIDATION_UNTIL` are
+variables and `MAIL_VALIDATION_TOKEN` is a secret. The deploy job fails before
+rollout on an unknown mode, and in `validation` mode on a missing token or a
+missing, unparseable, or already-ended window.
+
 The dedicated IAM key may be absent only in `disabled` mode, so the app can be
 deployed before the key is issued. `validation` and `enabled` refuse to start
 without it (`MailModeGate`), and the deploy workflow fails before rollout. An
