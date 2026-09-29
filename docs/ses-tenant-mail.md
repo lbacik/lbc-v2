@@ -30,7 +30,8 @@ The visitor's address is validated and used only as Reply-To.
   the `X-Contact-Validation-Token` header; otherwise the send is rejected
   with 403. Every validation send is logged with `audit: true`
   (correlation ID, outcome, SES message ID, latency — never content,
-  addresses, tokens, credentials, or raw AWS exceptions).
+  addresses, tokens, credentials, or raw AWS exceptions). These records use
+  the Monolog `contact` channel, which prod writes unbuffered to stderr.
 - `enabled` — normal operation.
 
 In the `production` environment, `MAIL_MODE` and `MAIL_VALIDATION_UNTIL` are

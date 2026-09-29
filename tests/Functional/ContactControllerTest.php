@@ -209,7 +209,7 @@ class ContactControllerTest extends WebTestCase
         $mock->method('verify')->willReturn($recaptcha);
         static::getContainer()->set(ReCaptcha::class, $mock);
         static::getContainer()->set(SesClient::class, $this->ses);
-        static::getContainer()->set('logger', $this->logger);
+        static::getContainer()->set('monolog.logger.contact', $this->logger);
 
         return $client;
     }

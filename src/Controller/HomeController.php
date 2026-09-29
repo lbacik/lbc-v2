@@ -14,6 +14,7 @@ use App\Mail\MailNotAllowedException;
 use App\Mail\RecaptchaVerifier;
 use App\Mail\SesTenantMailSender;
 use App\Service\PortfolioService;
+use Monolog\Attribute\WithMonologChannel;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[WithMonologChannel('contact')]
 class HomeController extends AbstractController
 {
     private const CSRF_TOKEN_ID = 'contact';
