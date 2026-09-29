@@ -48,6 +48,8 @@ services:
             $mode: '%env(MAIL_MODE)%'
             $validationUntil: '%env(MAIL_VALIDATION_UNTIL)%'
             $validationToken: '%env(MAIL_VALIDATION_TOKEN)%'
+            $sesAccessKeyId: '%env(SES_ACCESS_KEY_ID)%'
+            $sesSecretAccessKey: '%env(SES_SECRET_ACCESS_KEY)%'
 
     App\Mail\ContactRateLimiter:
         arguments:

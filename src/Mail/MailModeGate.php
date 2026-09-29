@@ -15,6 +15,10 @@ namespace App\Mail;
  *
  * The gate carries no tenant/configuration-set/region/From values, so no mode
  * can ever select another mail boundary.
+ *
+ * Only disabled mode may run without the dedicated IAM key: with an empty key
+ * the SES client would fall back to its default credential chain (environment,
+ * ini files, instance metadata) and could send as a foreign identity.
  */
 final class MailModeGate
 {
@@ -25,6 +29,8 @@ final class MailModeGate
         string $mode,
         string $validationUntil = '',
         private readonly string $validationToken = '',
+        #[\SensitiveParameter] string $sesAccessKeyId = '',
+        #[\SensitiveParameter] string $sesSecretAccessKey = '',
     ) {
         try {
             $this->mode = MailMode::from($mode);
@@ -48,6 +54,10 @@ final class MailModeGate
 
         if (MailMode::Validation === $this->mode && null === $this->validationUntil) {
             throw new \InvalidArgumentException('Validation mail mode requires a time-bounded window.');
+        }
+
+        if (MailMode::Disabled !== $this->mode && ('' === trim($sesAccessKeyId) || '' === trim($sesSecretAccessKey))) {
+            throw new \InvalidArgumentException(\sprintf('Mail mode "%s" requires the dedicated SES access key.', $this->mode->value));
         }
     }
 

@@ -133,7 +133,7 @@ class ContactControllerTest extends WebTestCase
         $client = $this->clientWith(recaptcha: new Response(true));
         static::getContainer()->set(
             MailModeGate::class,
-            new MailModeGate('validation', (new \DateTimeImmutable('+1 hour'))->format('Y-m-d H:i:s'), 'op-secret'),
+            new MailModeGate('validation', (new \DateTimeImmutable('+1 hour'))->format('Y-m-d H:i:s'), 'op-secret', 'test-key', 'test-secret'),
         );
 
         $client->request('POST', '/contact', $this->validPayload($client));
@@ -154,7 +154,7 @@ class ContactControllerTest extends WebTestCase
         $client = $this->clientWith(recaptcha: new Response(true));
         static::getContainer()->set(
             MailModeGate::class,
-            new MailModeGate('validation', (new \DateTimeImmutable('-1 hour'))->format('Y-m-d H:i:s'), 'op-secret'),
+            new MailModeGate('validation', (new \DateTimeImmutable('-1 hour'))->format('Y-m-d H:i:s'), 'op-secret', 'test-key', 'test-secret'),
         );
 
         $client->request('POST', '/contact', $this->validPayload($client), [], ['HTTP_X-Contact-Validation-Token' => 'op-secret']);

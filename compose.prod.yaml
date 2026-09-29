@@ -28,15 +28,17 @@ services:
       APP_SECRET: "${APP_SECRET:?APP_SECRET is required}"
       # Deployment-owned SES v2 tenant boundary for the contact form.
       # Non-secret boundary values are plain inputs; the dedicated IAM key
-      # travels through the same required-env secret mechanism as APP_SECRET.
+      # travels through the same env secret mechanism as APP_SECRET.
       # See docs/ses-tenant-mail.md (incl. two-key rotation).
       SES_TENANT_NAME: "${SES_TENANT_NAME:?SES_TENANT_NAME is required}"
       SES_CONFIGURATION_SET: "${SES_CONFIGURATION_SET:-lbc-first-contact-events}"
       SES_REGION: "${SES_REGION:-eu-central-1}"
       MAIL_FROM_ADDRESS: "${MAIL_FROM_ADDRESS:-no-reply@lukaszbacik.com}"
       MAIL_OPERATOR_RECIPIENT: "${MAIL_OPERATOR_RECIPIENT:?MAIL_OPERATOR_RECIPIENT is required}"
-      SES_ACCESS_KEY_ID: "${SES_ACCESS_KEY_ID:?SES_ACCESS_KEY_ID is required}"
-      SES_SECRET_ACCESS_KEY: "${SES_SECRET_ACCESS_KEY:?SES_SECRET_ACCESS_KEY is required}"
+      # The dedicated IAM key is optional only while MAIL_MODE is disabled;
+      # MailModeGate refuses validation/enabled without it.
+      SES_ACCESS_KEY_ID: "${SES_ACCESS_KEY_ID:-}"
+      SES_SECRET_ACCESS_KEY: "${SES_SECRET_ACCESS_KEY:-}"
       MAIL_MODE: "${MAIL_MODE:-disabled}"
       MAIL_VALIDATION_UNTIL: "${MAIL_VALIDATION_UNTIL:-}"
       MAIL_VALIDATION_TOKEN: "${MAIL_VALIDATION_TOKEN:-}"

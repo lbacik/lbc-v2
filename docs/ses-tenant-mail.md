@@ -14,7 +14,7 @@ were removed.
 | Region             | `eu-central-1`              | `SES_REGION`             |
 | From identity      | `no-reply@lukaszbacik.com`  | `MAIL_FROM_ADDRESS`      |
 | Operator recipient | deployment-owned (required) | `MAIL_OPERATOR_RECIPIENT`|
-| Dedicated IAM key  | required, secret            | `SES_ACCESS_KEY_ID` / `SES_SECRET_ACCESS_KEY` |
+| Dedicated IAM key  | secret; required unless `MAIL_MODE=disabled` | `SES_ACCESS_KEY_ID` / `SES_SECRET_ACCESS_KEY` |
 
 `App\Mail\MailBoundary::assertValid()` runs before every send and rejects
 missing or wrong values. The sender API accepts a `ContactMessage` only, so
@@ -32,6 +32,12 @@ The visitor's address is validated and used only as Reply-To.
   (correlation ID, outcome, SES message ID, latency — never content,
   addresses, tokens, credentials, or raw AWS exceptions).
 - `enabled` — normal operation.
+
+The dedicated IAM key may be absent only in `disabled` mode, so the app can be
+deployed before the key is issued. `validation` and `enabled` refuse to start
+without it (`MailModeGate`), and the deploy workflow fails before rollout. An
+empty key must never reach a send: the SES client would fall back to its
+default credential chain and could send as a foreign identity.
 
 Enabling `validation` against the real SES tenant additionally depends on the
 non-sending infrastructure in the `aws` repo (`infrastructure/ses-tenants`)
