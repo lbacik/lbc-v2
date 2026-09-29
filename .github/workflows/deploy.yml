@@ -85,13 +85,36 @@ jobs:
           SES_ACCESS_KEY_ID: ${{ secrets.SES_ACCESS_KEY_ID }}
           SES_SECRET_ACCESS_KEY: ${{ secrets.SES_SECRET_ACCESS_KEY }}
           MAIL_MODE: ${{ vars.MAIL_MODE }}
+          MAIL_VALIDATION_UNTIL: ${{ vars.MAIL_VALIDATION_UNTIL }}
+          MAIL_VALIDATION_TOKEN: ${{ secrets.MAIL_VALIDATION_TOKEN }}
         run: |
-          # The SES key may be absent only while mail is disabled. The app
-          # refuses other modes without it, but only on the first /contact
-          # request, so fail here before rollout instead.
-          if [ "${MAIL_MODE:-disabled}" != "disabled" ] && { [ -z "$SES_ACCESS_KEY_ID" ] || [ -z "$SES_SECRET_ACCESS_KEY" ]; }; then
-            echo "::error::MAIL_MODE=$MAIL_MODE requires SES_ACCESS_KEY_ID and SES_SECRET_ACCESS_KEY" >&2
+          # MailModeGate enforces these rules too, but only on the first
+          # /contact request, so fail here before rollout instead.
+          mode="${MAIL_MODE:-disabled}"
+          case "$mode" in
+            disabled|validation|enabled) ;;
+            *) echo "::error::Unknown MAIL_MODE=$mode" >&2; exit 1 ;;
+          esac
+          # The SES key may be absent only while mail is disabled.
+          if [ "$mode" != "disabled" ] && { [ -z "$SES_ACCESS_KEY_ID" ] || [ -z "$SES_SECRET_ACCESS_KEY" ]; }; then
+            echo "::error::MAIL_MODE=$mode requires SES_ACCESS_KEY_ID and SES_SECRET_ACCESS_KEY" >&2
             exit 1
+          fi
+          # Validation is operator-restricted and time-bounded: it needs the
+          # token and a window that has not already ended.
+          if [ "$mode" = "validation" ]; then
+            if [ -z "$MAIL_VALIDATION_TOKEN" ]; then
+              echo "::error::MAIL_MODE=validation requires the MAIL_VALIDATION_TOKEN secret" >&2
+              exit 1
+            fi
+            if ! until_ts=$(date -d "$MAIL_VALIDATION_UNTIL" +%s 2>/dev/null) || [ -z "$MAIL_VALIDATION_UNTIL" ]; then
+              echo "::error::MAIL_MODE=validation requires a valid MAIL_VALIDATION_UNTIL, got '$MAIL_VALIDATION_UNTIL'" >&2
+              exit 1
+            fi
+            if [ "$until_ts" -le "$(date +%s)" ]; then
+              echo "::error::MAIL_VALIDATION_UNTIL=$MAIL_VALIDATION_UNTIL has already passed" >&2
+              exit 1
+            fi
           fi
           # --env-file /dev/null is load-bearing: without it compose reads the
           # repo's committed .env, and a missing secret here would silently
