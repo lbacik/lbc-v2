@@ -1,0 +1,203 @@
+<!-- ======= Prototype Variant D: Sticky Header (Fusion of A & C) ======= -->
+<div id="sticky-agent-banner-container" style="position: relative; z-index: 9995;">
+
+    <!-- Top Sticky Bar -->
+    <header id="sticky-agent-banner" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9995;
+        background: rgba(13, 17, 23, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(48, 54, 61, 0.85);
+        color: #c9d1d9;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    ">
+        <div class="container-fluid px-3 px-md-4 py-2">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+
+                <!-- Left: Window controls (Aspect C) -->
+                <div class="d-flex align-items-center gap-2" style="min-width: 60px;">
+                    <!-- macOS dots -->
+                    <div class="d-flex align-items-center gap-1">
+                        <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+                        <span style="width: 10px; height: 10px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+                        <span style="width: 10px; height: 10px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+                    </div>
+                </div>
+
+                <!-- Center: Headline & Pitch (Aspect A) -->
+                <div class="d-flex align-items-center justify-content-center gap-2 flex-grow-1 text-center" style="font-size: 13px;">
+                    <span class="d-none d-sm-inline" style="color: #e6edf3;">
+                        Currently building: <strong style="color: #58a6ff;">HireTheAgent.dev</strong> &mdash; autonomous AI agent for software engineers.
+                    </span>
+                    <span class="d-sm-none" style="color: #e6edf3; font-size: 12px;">
+                        Building <strong style="color: #58a6ff;">HireTheAgent.dev</strong>
+                    </span>
+
+                    <!-- Dropdown toggle for CLI proof -->
+                    <button id="sticky-log-toggle" type="button" class="btn btn-sm py-0 px-2 rounded-pill font-monospace" style="background: rgba(56, 139, 253, 0.15); color: #79c0ff; border: 1px solid rgba(56, 139, 253, 0.3); font-size: 11px; cursor: pointer;" title="Toggle Agent Run Log">
+                        <span>Proof Log</span> <i class="bi bi-chevron-down" id="sticky-log-chevron"></i>
+                    </button>
+                </div>
+
+                <!-- Right: CTA Buttons & Close [X] (Aspect A) -->
+                <div class="d-flex align-items-center gap-2 ms-auto ms-md-0" style="min-width: 60px; justify-content: flex-end;">
+                    <a href="https://hiretheagent.dev" target="_blank" class="btn btn-sm rounded-pill fw-semibold shadow-sm d-inline-flex align-items-center gap-1 px-3 py-1" style="background: #238636; color: #ffffff; border: none; font-size: 12px; transition: background 0.15s;" onmouseover="this.style.background='#2ea043'" onmouseout="this.style.background='#238636'">
+                        <span>hiretheagent.dev</span>
+                        <i class="bi bi-box-arrow-up-right" style="font-size: 10px;"></i>
+                    </a>
+
+                    <a href="https://github.com/lbacik/simple-coding-agent" target="_blank" class="btn btn-sm rounded-pill d-none d-sm-inline-flex align-items-center gap-1 px-2 py-1" style="background: #21262d; color: #c9d1d9; border: 1px solid #30363d; font-size: 12px;" title="View on GitHub">
+                        <i class="bx bxl-github"></i>
+                    </a>
+
+                    <!-- Close Button -->
+                    <button id="sticky-banner-close" type="button" class="btn btn-sm text-secondary p-1 ms-1 d-flex align-items-center justify-content-center" style="background: transparent; border: none; width: 26px; height: 26px; border-radius: 50%;" title="Close banner" onmouseover="this.style.color='#f0f6fc'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='#8b949e'; this.style.background='transparent';">
+                        <i class="bi bi-x-lg" style="font-size: 13px;"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Collapsible Dropdown Terminal Drawer (Aspect C) -->
+        <div id="sticky-terminal-drawer" style="
+            display: none;
+            background: #090d13;
+            border-top: 1px solid #21262d;
+            border-bottom: 2px solid #30363d;
+            padding: 14px 20px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #c9d1d9;
+            box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.4);
+        ">
+            <div class="container-fluid px-2">
+                <div class="d-flex justify-content-between align-items-center mb-2 pb-1 border-bottom border-dark text-muted" style="font-size: 11px;">
+                    <div><span style="color: #3fb950;">● LIVE VERIFIED RUN</span> &mdash; Real pull request generated by Hire The Agent on this repository:</div>
+                    <a href="https://github.com/lbacik/lbc-v2/pull/13" target="_blank" style="color: #58a6ff; text-decoration: underline;">GitHub PR #13 &nearr;</a>
+                </div>
+
+                <div class="row gy-2">
+                    <div class="col-md-7">
+                        <div><span style="color: #79c0ff;">$ gh issue view 8</span> &rarr; <span style="color: #f0f6fc;">"Add Hire The Agent portfolio entry"</span> <span style="color: #a5d6ff;">[ready-for-agent]</span></div>
+                        <div><span style="color: #79c0ff;">$ docker compose up agent</span></div>
+                        <div class="ps-3" style="color: #8b949e; border-left: 2px solid #238636;">
+                            <div>&bull; Isolated Docker container spawned: <span style="color: #79c0ff;">node:20-alpine</span></div>
+                            <div>&bull; Implemented changes & updated components</div>
+                            <div>&bull; Test suite executed: <span style="color: #3fb950; font-weight: bold;">npm test &rarr; passed (100% OK)</span></div>
+                            <div>&bull; Pull Request opened: <a href="https://github.com/lbacik/lbc-v2/pull/13" target="_blank" style="color: #58a6ff;">#13</a> &bull; Status: <strong style="color: #3fb950;">Merged to main &check;</strong></div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 d-flex flex-column justify-content-center align-items-md-end gap-2 pt-2 pt-md-0">
+                        <div class="small text-muted text-md-end">Want autonomous agents to test & build your backlog?</div>
+                        <div class="d-flex gap-2">
+                            <a href="https://hiretheagent.dev" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-1 font-sans" style="font-size: 12px; font-family: sans-serif;">
+                                Try HireTheAgent.dev &nearr;
+                            </a>
+                            <a href="{{ path('portfolio_details', { slug: 'hiretheagent' }) }}" class="btn btn-sm btn-outline-light rounded-pill px-2 py-1 portfolio-details-lightbox" data-glightbox="type: external" style="font-size: 12px; font-family: sans-serif;">
+                                View in Portfolio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Small Reopen Badge (Visible after user closes the banner) -->
+    <div id="sticky-banner-reopen" style="
+        display: none;
+        position: fixed;
+        top: 15px;
+        right: 65px;
+        z-index: 9994;
+        background: #0d1117;
+        color: #f0f6fc;
+        border: 1px solid #30363d;
+        border-radius: 9999px;
+        padding: 5px 12px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        align-items: center;
+        gap: 6px;
+    ">
+        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #238636; box-shadow: 0 0 5px #238636;"></span>
+        <span>HireTheAgent.dev</span>
+        <i class="bi bi-chevron-down" style="font-size: 10px; color: #8b949e;"></i>
+    </div>
+
+</div>
+
+<script>
+(() => {
+    const banner = document.getElementById('sticky-agent-banner');
+    const closeBtn = document.getElementById('sticky-banner-close');
+    const reopenBtn = document.getElementById('sticky-banner-reopen');
+    const logToggle = document.getElementById('sticky-log-toggle');
+    const terminalDrawer = document.getElementById('sticky-terminal-drawer');
+    const logChevron = document.getElementById('sticky-log-chevron');
+
+    function updateBodyOffset() {
+        if (banner && banner.style.display !== 'none') {
+            const h = banner.offsetHeight;
+            document.body.style.paddingTop = h + 'px';
+            const headerNav = document.getElementById('header');
+            if (headerNav) {
+                headerNav.style.top = h + 'px';
+            }
+        } else {
+            document.body.style.paddingTop = '0px';
+            const headerNav = document.getElementById('header');
+            if (headerNav) {
+                headerNav.style.top = '0px';
+            }
+        }
+    }
+
+    // Initial offset calculation
+    updateBodyOffset();
+    window.addEventListener('resize', updateBodyOffset);
+
+    // Toggle dropdown terminal drawer
+    logToggle?.addEventListener('click', () => {
+        if (!terminalDrawer) return;
+        const isHidden = terminalDrawer.style.display === 'none' || terminalDrawer.style.display === '';
+        terminalDrawer.style.display = isHidden ? 'block' : 'none';
+        if (logChevron) {
+            logChevron.className = isHidden ? 'bi bi-chevron-up' : 'bi bi-chevron-down';
+        }
+        updateBodyOffset();
+    });
+
+    // Close banner
+    closeBtn?.addEventListener('click', () => {
+        if (banner) {
+            banner.style.display = 'none';
+        }
+        if (reopenBtn) {
+            reopenBtn.style.display = 'inline-flex';
+        }
+        updateBodyOffset();
+    });
+
+    // Reopen banner
+    reopenBtn?.addEventListener('click', () => {
+        if (banner) {
+            banner.style.display = 'block';
+        }
+        if (reopenBtn) {
+            reopenBtn.style.display = 'none';
+        }
+        updateBodyOffset();
+    });
+})();
+</script>

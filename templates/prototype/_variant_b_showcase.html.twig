@@ -1,0 +1,127 @@
+<!-- ======= Prototype Variant B: Featured Project Showcase Section ======= -->
+<section id="featured-project" class="featured-project py-5" style="background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%); border-bottom: 1px solid #e2e8f0;">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title text-start mb-4">
+      <span class="badge bg-primary px-3 py-1 rounded-pill mb-2 text-uppercase fw-semibold" style="letter-spacing: 0.8px; font-size: 11px;">
+        Featured Project &bull; Autonomous AI
+      </span>
+      <h2 style="font-size: 32px; font-weight: 700; color: #1e293b; margin-bottom: 8px;">Hire The Agent</h2>
+      <p style="color: #475569; font-size: 17px; max-width: 760px; line-height: 1.6;">
+        An autonomous AI agent for software engineers and dev teams. You plan the work in a GitHub issue, and the agent turns it into a verified, tested Pull Request.
+      </p>
+    </div>
+
+    <!-- Dogfooding Alert Banner -->
+    <div class="alert alert-light border border-primary-subtle shadow-sm rounded-4 p-3 mb-4 d-flex align-items-center gap-3" style="background: #eff6ff;">
+      <div class="rounded-circle d-flex align-items-center justify-content-center text-primary" style="background: rgba(37, 99, 235, 0.12); width: 36px; height: 36px; min-width: 36px;">
+        <i class="bx bx-check-double fs-4"></i>
+      </div>
+      <div class="small" style="color: #1e40af;">
+        <strong>Dogfooded on this website!</strong> The Hire The Agent portfolio entry and test suite integration on this very site was implemented and submitted via <a href="https://github.com/lbacik/lbc-v2/pull/13" target="_blank" class="fw-bold text-decoration-underline" style="color: #1d4ed8;">Pull Request #13</a> by the agent itself.
+      </div>
+    </div>
+
+    <div class="row align-items-center gy-4">
+      <!-- Left Column: Workflow & Value Props -->
+      <div class="col-lg-7">
+        <div class="pe-lg-4">
+
+          <div class="d-flex flex-column gap-3 mb-4">
+            <div class="d-flex gap-3 align-items-start p-3 rounded-3 bg-white shadow-sm border border-light">
+              <div class="rounded-circle bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; min-width: 38px;">
+                <i class="bx bx-git-pull-request fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1" style="color: #1e293b; font-size: 15px;">1. Issue-Driven Workflow</h6>
+                <p class="small text-muted mb-0">Plan work as a GitHub issue, attach the <code>ready-for-agent</code> label, and let the agent take over autonomously.</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start p-3 rounded-3 bg-white shadow-sm border border-light">
+              <div class="rounded-circle bg-success-subtle text-success p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; min-width: 38px;">
+                <i class="bx bxl-docker fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1" style="color: #1e293b; font-size: 15px;">2. Isolated Docker Sandbox</h6>
+                <p class="small text-muted mb-0">The agent inspects repo context, plans code changes, edits files, and executes the project's test suite inside a safe, sandboxed environment.</p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start p-3 rounded-3 bg-white shadow-sm border border-light">
+              <div class="rounded-circle bg-info-subtle text-info-emphasis p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; min-width: 38px;">
+                <i class="bx bx-shield-quarter fs-5"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1" style="color: #1e293b; font-size: 15px;">3. Verified Pull Request</h6>
+                <p class="small text-muted mb-0">Only opens a PR once all automated tests pass with green checks, ready for standard human review and merge.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech Stack Tags -->
+          <div class="mb-4">
+            <span class="text-uppercase small fw-bold text-muted d-block mb-2" style="font-size: 11px; letter-spacing: 0.5px;">Technology Stack:</span>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge bg-white text-dark border shadow-sm px-2 py-1"><i class="bx bxl-python text-primary"></i> Python</span>
+              <span class="badge bg-white text-dark border shadow-sm px-2 py-1"><i class="bx bx-brain text-warning"></i> Claude Agent SDK</span>
+              <span class="badge bg-white text-dark border shadow-sm px-2 py-1"><i class="bx bxl-docker text-info"></i> Docker Sandbox</span>
+              <span class="badge bg-white text-dark border shadow-sm px-2 py-1"><i class="bx bxl-github"></i> GitHub API</span>
+              <span class="badge bg-white text-dark border shadow-sm px-2 py-1"><i class="bx bxl-react text-info"></i> Next.js &bull; TypeScript</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
+            <a href="https://hiretheagent.dev" target="_blank" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold shadow-sm d-inline-flex align-items-center gap-2">
+              <span>Visit hiretheagent.dev</span>
+              <i class="bi bi-box-arrow-up-right" style="font-size: 12px;"></i>
+            </a>
+            <a href="https://github.com/lbacik/simple-coding-agent" target="_blank" class="btn btn-outline-dark px-4 py-2 rounded-pill fw-semibold d-inline-flex align-items-center gap-2">
+              <i class="bx bxl-github fs-5"></i>
+              <span>GitHub Repo</span>
+            </a>
+            <a href="{{ path('portfolio_details', { slug: 'hiretheagent' }) }}" class="btn btn-link text-decoration-none text-muted align-self-center portfolio-details-lightbox" data-glightbox="type: external">
+              Portfolio details &rarr;
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Browser Preview -->
+      <div class="col-lg-5">
+        <div class="showcase-card shadow-lg rounded-4 overflow-hidden border border-1 bg-white">
+          <!-- Fake Browser Chrome Header -->
+          <div class="px-3 py-2 d-flex align-items-center justify-content-between text-white-50" style="background: #1e293b;">
+            <div class="d-flex gap-1">
+              <span class="rounded-circle d-inline-block" style="width: 10px; height: 10px; background: #ef4444;"></span>
+              <span class="rounded-circle d-inline-block" style="width: 10px; height: 10px; background: #f59e0b;"></span>
+              <span class="rounded-circle d-inline-block" style="width: 10px; height: 10px; background: #10b981;"></span>
+            </div>
+            <span class="font-monospace text-truncate px-2" style="font-size: 11px; color: #94a3b8;">https://hiretheagent.dev</span>
+            <i class="bx bx-lock-alt text-success" style="font-size: 12px;"></i>
+          </div>
+
+          <!-- Image with Lightbox Zoom -->
+          <a href="{{ path('portfolio_details', { slug: 'hiretheagent' }) }}" class="portfolio-details-lightbox d-block position-relative" data-glightbox="type: external" title="View HireTheAgent details">
+            <img src="{{ asset('template/img/portfolio-2/hiretheagent-03.png') }}" class="img-fluid w-100" alt="Hire The Agent screenshot" style="display: block;">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(15, 23, 42, 0.4); opacity: 0; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+              <span class="btn btn-light btn-sm rounded-pill px-3 shadow"><i class="bx bx-zoom-in me-1"></i> Preview Details</span>
+            </div>
+          </a>
+
+          <!-- Card Footer -->
+          <div class="p-3 bg-white border-top d-flex justify-content-between align-items-center">
+            <span class="small text-muted"><i class="bi bi-cpu text-primary me-1"></i> Autonomous AI Coding Agent</span>
+            <a href="https://hiretheagent.dev" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+              Open App &nearr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Featured Project Section -->

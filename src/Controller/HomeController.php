@@ -44,10 +44,13 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'home', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $variant = $request->query->get('variant', 'A');
+
         return $this->render('index.html.twig', [
             'portfolioItems' => $this->portfolioService->getItems(),
+            'variant' => $variant,
         ]);
     }
 

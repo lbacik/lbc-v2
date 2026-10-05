@@ -7,6 +7,9 @@
     <nav id="navbar" class="navbar nav-menu">
         <ul>
             <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+            {% if variant|default('') == 'B' %}
+            <li><a href="#featured-project" class="nav-link scrollto" title="HireTheAgent.dev"><i class="bx bx-bot"></i> <span>Hire The Agent</span></a></li>
+            {% endif %}
             <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
             <li><a href="#certifications" class="nav-link scrollto"><i class="bx bx-certification"></i> <span>Certifications</span></a></li>
             <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>

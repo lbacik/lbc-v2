@@ -1,11 +1,23 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+  {% if variant|default('A') == 'D' %}
+    {{ include('prototype/_variant_d_sticky_header.html.twig') }}
+  {% endif %}
+
   {{ include('partials/_header.html.twig') }}
 
-  {{ include('partials/_hero.html.twig') }}
+  {% if variant|default('A') == 'A' %}
+    {{ include('prototype/_variant_a_hero.html.twig') }}
+  {% else %}
+    {{ include('partials/_hero.html.twig') }}
+  {% endif %}
 
   <main id="main">
+
+    {% if variant|default('A') == 'B' %}
+      {{ include('prototype/_variant_b_showcase.html.twig') }}
+    {% endif %}
 
     <!-- ======= About Section ======= -->
     {{ include('partials/_about.html.twig') }}
@@ -30,6 +42,14 @@
 
   </main><!-- End #main -->
 
+  {% if variant|default('A') == 'C' %}
+    {{ include('prototype/_variant_c_terminal.html.twig') }}
+  {% endif %}
+
   {{ include('partials/_footer.html.twig') }}
+
+  {% if app.environment != 'prod' %}
+    {{ include('prototype/_switcher.html.twig') }}
+  {% endif %}
 
 {% endblock %}
