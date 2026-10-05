@@ -118,6 +118,13 @@ jobs:
               exit 1
             fi
           fi
+          # The template silently drops the tracker when the ID is empty, so
+          # a missing variable would otherwise go unnoticed in production.
+          uuid_re='^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+          if ! printf '%s' "$UMAMI_WEBSITE_ID" | grep -Eq "$uuid_re"; then
+            echo "::error::UMAMI_WEBSITE_ID must be a website UUID from Umami, got '$UMAMI_WEBSITE_ID'" >&2
+            exit 1
+          fi
           # --env-file /dev/null is load-bearing: without it compose reads the
           # repo's committed .env, and a missing secret here would silently
           # fall back to the dev APP_SECRET instead of failing the deploy.
