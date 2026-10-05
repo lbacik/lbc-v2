@@ -26,7 +26,12 @@
               <h3>Information</h3>
               <ul>
                 <li><strong>Category</strong>: {{ category }}</li>
-                <li><strong>URL</strong>: <a href="{{ url }}" target="_blank">{{ urlLabel }}</a></li>
+                {% if unavailable %}
+                  <li><span class="badge bg-secondary badge-unavailable">Currently unavailable</span></li>
+                  <li><strong>URL</strong>: <span class="text-muted">{{ urlLabel }}</span></li>
+                {% else %}
+                  <li><strong>URL</strong>: <a href="{{ url }}" target="_blank">{{ urlLabel }}</a></li>
+                {% endif %}
                 {% if language %}
                   <li><strong>Language</strong>: {{ language }}</li>
                 {% endif %}
