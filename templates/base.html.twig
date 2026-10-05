@@ -36,6 +36,10 @@
 
         <script src="https://www.google.com/recaptcha/api.js?render={{ google_recaptcha_site_key }}" defer async></script>
 
+        {% if umami_website_id and umami_script_url %}
+        <script defer src="{{ umami_script_url }}" data-website-id="{{ umami_website_id }}" data-domains="lukaszbacik.com,www.lukaszbacik.com"></script>
+        {% endif %}
+
         <title>{% block title %}lbc{% endblock %}</title>
 
         {% block stylesheets %}

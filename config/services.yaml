@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    umami_script_url: '%env(UMAMI_SCRIPT_URL)%'
+    umami_website_id: '%env(UMAMI_WEBSITE_ID)%'
 
 services:
     # default configuration for services in *this* file

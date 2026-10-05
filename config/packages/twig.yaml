@@ -1,5 +1,8 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        umami_script_url: '%umami_script_url%'
+        umami_website_id: '%umami_website_id%'
 
 when@test:
     twig:
