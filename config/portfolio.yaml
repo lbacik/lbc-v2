@@ -125,27 +125,6 @@ JsonHub:
     JsonHub is a web application for storing and sharing JSON and JSON Schema documents. It is currently in the 
     early development phase but is already functional.
 
-GProDB:
-  image: gprodb-01.jpeg
-  category: Web
-  filter: web
-  slug: gprodb
-  type: Application
-  url:
-    name: pages.gprodb.com
-    href: https://pages.gprodb.com/018c0c05-be94-7b11-aaa5-9d59c24cbbda
-  carousel:
-    - gprodb-01.jpeg
-    - gprodb-02.jpeg
-    - gprodb-03.jpeg
-    - gprodb-04.jpeg
-  description: >
-    <strong>Stack</strong>: PHP (Symfony), Bootstrap, Docker
-
-
-    GProDB is a web application that enables quick creation of business landing pages, featuring JsonHub integration 
-    for data storage. Future plans include a more user-friendly interface and enhanced search capabilities.
-
 GLife:
   image: glife-01.jpeg
   category: Web
