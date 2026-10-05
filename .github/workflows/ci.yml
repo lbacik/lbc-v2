@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Same PHP line as the FrankenPHP image in the Dockerfile.
+  PHP_VERSION: '8.5'
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ctype, iconv, intl, mbstring
+          coverage: none
+          tools: composer:v2
+
+      # post-install-cmd (cache:clear, importmap:install) runs here, so
+      # assets/vendor is populated before the functional tests render pages.
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit
+
+  quality:
+    name: Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ctype, iconv, intl, mbstring
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer files
+        run: composer validate --strict --no-check-publish
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Audit dependencies
+        run: composer audit
+
+      - name: PHP syntax check
+        run: find src tests config public -name '*.php' -print0 | xargs -0 -n1 -P4 php -l > /dev/null
+
+      - name: Lint YAML
+        run: php bin/console lint:yaml config translations compose.yaml compose.prod.yaml --parse-tags
+
+      - name: Lint Twig
+        run: php bin/console lint:twig templates
+
+      - name: Lint container
+        run: php bin/console lint:container
