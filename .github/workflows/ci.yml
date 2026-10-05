@@ -78,3 +78,9 @@ jobs:
 
       - name: Lint container
         run: php bin/console lint:container
+
+      # The Symfony extension reads the compiled container, so warm the dev cache first.
+      - name: Static analysis (PHPStan)
+        run: |
+          php bin/console cache:warmup --env=dev
+          vendor/bin/phpstan analyse --memory-limit=512M --no-progress
