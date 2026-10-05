@@ -78,6 +78,8 @@ jobs:
           APP_SECRET: ${{ secrets.APP_SECRET }}
           GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
           GOOGLE_RECAPTCHA_SECRET: ${{ secrets.GOOGLE_RECAPTCHA_SECRET }}
+          UMAMI_SCRIPT_URL: ${{ vars.UMAMI_SCRIPT_URL }}
+          UMAMI_WEBSITE_ID: ${{ vars.UMAMI_WEBSITE_ID }}
           SES_TENANT_NAME: ${{ vars.SES_TENANT_NAME }}
           SES_CONFIGURATION_SET: ${{ vars.SES_CONFIGURATION_SET }}
           SES_REGION: ${{ vars.SES_REGION }}

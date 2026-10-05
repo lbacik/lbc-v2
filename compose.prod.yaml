@@ -48,6 +48,8 @@ services:
       RECAPTCHA_SCORE_THRESHOLD: "${RECAPTCHA_SCORE_THRESHOLD:-0.5}"
       GOOGLE_RECAPTCHA_SITE_KEY: "${GOOGLE_RECAPTCHA_SITE_KEY}"
       GOOGLE_RECAPTCHA_SECRET: "${GOOGLE_RECAPTCHA_SECRET}"
+      UMAMI_SCRIPT_URL: "${UMAMI_SCRIPT_URL:-https://umami.rum.luka.sh/script.js}"
+      UMAMI_WEBSITE_ID: "${UMAMI_WEBSITE_ID:-}"
       # nginx-proxy terminates TLS; trust only the directly connected proxy
       TRUSTED_PROXIES: REMOTE_ADDR
       # nginx-proxy / acme-companion discovery. VIRTUAL_PORT is not optional
