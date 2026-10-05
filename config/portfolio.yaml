@@ -1,3 +1,28 @@
+Hire The Agent:
+  image: hiretheagent-03.png
+  category: Web
+  filter: web
+  slug: hiretheagent
+  type: Application
+  url:
+    name: hiretheagent.dev
+    href: https://hiretheagent.dev
+  carousel:
+    - hiretheagent-01.png
+    - hiretheagent-02.png
+    - hiretheagent-03.png
+  description: >
+    <strong>Stack</strong>: Python, Claude Agent SDK, GitHub API, Docker, Next.js, React, TypeScript
+
+
+    Hire The Agent is an autonomous AI agent for software engineers and dev teams. You plan the work as a
+    GitHub issue and add the <code>ready-for-agent</code> label. The agent picks it up, implements it in an
+    isolated Docker sandbox, runs the test suite and opens a verified pull request for human review.
+
+
+    The agent runs on real projects, including this website. Its source is available on
+    <a href="https://github.com/lbacik/simple-coding-agent" target="_blank">GitHub</a>.
+
 Fortune:
   image: fortune-01.jpeg
   category: Web
