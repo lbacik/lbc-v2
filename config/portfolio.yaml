@@ -3,6 +3,7 @@ Fortune:
   category: Web
   filter: web
   slug: fortune
+  unavailable: true
   type: Application
   url:
     name: fortune.luka.sh
@@ -150,6 +151,7 @@ GLife:
   category: Web
   filter: web
   slug: glife
+  unavailable: true
   type: Application
   url:
     name: glife.luka.sh

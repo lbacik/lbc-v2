@@ -67,6 +67,7 @@ class PortfolioService
             'category' => $item['category'],
             'filter' => $item['filter'],
             'slug' => $item['slug'],
+            'unavailable' => (bool) ($item['unavailable'] ?? false),
         ];
     }
 
@@ -85,6 +86,7 @@ class PortfolioService
                 fn (string $image) => self::PORTFOLIO_IMAGE_PATH . $image,
                 $itemDetails['carousel'],
             ),
+            (bool) ($itemDetails['unavailable'] ?? false),
         ];
     }
 }

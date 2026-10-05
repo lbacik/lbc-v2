@@ -33,6 +33,9 @@
                             >
                         {% endif %}
                             <img src="{{ asset(item.imageUrl) }}" class="img-fluid" alt="">
+                            {% if item.unavailable %}
+                                <span class="badge bg-secondary badge-unavailable" style="position: absolute; top: 10px; left: 10px; z-index: 3">Currently unavailable</span>
+                            {% endif %}
                             <div class="portfolio-info">
                                 <h4>{{ item.title|default('') }}</h4>
                                 <p>{{ item.category|default('') }}</p>

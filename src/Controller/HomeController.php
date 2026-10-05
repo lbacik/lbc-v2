@@ -60,7 +60,8 @@ class HomeController extends AbstractController
             $urlLabel,
             $title,
             $description,
-            $images
+            $images,
+            $unavailable
         ] = $this->portfolioService->getDetails($slug);
 
         return $this->render('portfolio-details.html.twig', [
@@ -71,6 +72,7 @@ class HomeController extends AbstractController
             'description' => $description,
             'images' => $images,
             'language' => null,
+            'unavailable' => $unavailable,
         ]);
     }
 
